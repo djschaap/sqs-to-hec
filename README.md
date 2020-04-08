@@ -2,6 +2,10 @@
 
 [![Build Status - master](https://travis-ci.com/djschaap/sqs-to-hec.svg?branch=master)](https://travis-ci.com/djschaap/sqs-to-hec)
 
+Project Home: https://github.com/djschaap/sqs-to-hec
+
+Docker Hub: https://cloud.docker.com/repository/docker/djschaap/sqs-to-hec
+
 ## Overview
 
 sqs-to-hec reads messages from an AWS SQS queue and submits them to
