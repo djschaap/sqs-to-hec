@@ -39,11 +39,11 @@ func main() {
 		sqsConfig,
 	)
 
-	app.RunOnce()
+	app.RunForever()
 }
 
 func printVersion() {
-	fmt.Println("sqs-to-hec cli  Version:",
-		version, " Commit:", commit,
+	fmt.Println("sqs-to-hec cli  Version:", version,
+		" Commit:", commit,
 		" Built at:", buildDt)
 }

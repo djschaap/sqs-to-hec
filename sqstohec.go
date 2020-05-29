@@ -26,7 +26,7 @@ type sess struct {
 	SqsConfig SqsConfig
 }
 
-func (self *sess) RunOnce() {
+func (self *sess) RunForever() {
 	var maxReceiveMessages int64 = 2 // TODO create MAX_RECEIVE_MESSAGES env var
 	var maxReceiveWait int64 = 2     // in seconds
 	//maxSendEvents := 2 // TODO create MAX_SEND_EVENTS env var
