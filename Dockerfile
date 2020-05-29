@@ -12,9 +12,9 @@ RUN \
   && echo "BUILD version=${VER}" \
   && CGO_ENABLED=0 GOOS=linux go build -ldflags \
     "-X main.build_dt=${BUILD_DT} -X main.commit=${COMMIT_HASH} -X main.version=${VER}" \
-    -o main cmd/cli/main.go
+    -o cli cmd/cli/main.go
 
 FROM scratch
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-COPY --from=builder /app/main /
-CMD ["/main"]
+COPY --from=builder /app/cli /
+CMD ["/cli"]
