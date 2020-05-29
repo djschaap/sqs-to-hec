@@ -16,11 +16,11 @@ Splunk HTTP Event Collector (HEC).
 ### Compile Locally
 
 ```bash
-go fmt cmd/cli/cli.go
+go fmt cmd/cli/main.go
 go fmt pkg/receivesqs/receivesqs.go
 go fmt pkg/sendhec/sendhec.go
 go mod tidy
-go test all
+go test ./...
 # commit any changes
 BUILD_DT=`date +%FT%T%z`
 COMMIT=`git rev-parse --short HEAD`
@@ -28,7 +28,7 @@ FULL_COMMIT=`git log -1`
 VER=0.0.0
 go build -ldflags \
   "-X main.build_dt=${BUILD_DT} -X main.commit=${COMMIT} -X main.version=${VER}" \
-  cmd/cli/cli.go
+  cmd/cli/main.go
 ```
 
 ### Build Container (Manually)
