@@ -5,7 +5,7 @@ WORKDIR /app
 RUN \
   BUILD_DT=`date +%FT%T%z` \
   && COMMIT=container \
-  && VER=0.0.2 \
+  && VER=0.0.3 \
   && echo "BUILD build_dt=${BUILD_DT}" \
   && echo "BUILD commit=${COMMIT}" \
   && echo "BUILD version=${VER}" \
@@ -14,5 +14,6 @@ RUN \
     -o main cmd/cli/main.go
 
 FROM scratch
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=builder /app/main /
 CMD ["/main"]
