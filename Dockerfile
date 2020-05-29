@@ -1,16 +1,17 @@
-FROM golang:latest as builder
+FROM golang as builder
+ARG SOURCE_COMMIT=unset
+ARG VER=0.0.3
 RUN mkdir /app
-ADD . /app/
+COPY . /app/
 WORKDIR /app
 RUN \
   BUILD_DT=`date +%FT%T%z` \
-  && COMMIT=container \
-  && VER=0.0.3 \
+  && COMMIT_HASH=$(echo $SOURCE_COMMIT | cut -c 1-7) \
   && echo "BUILD build_dt=${BUILD_DT}" \
-  && echo "BUILD commit=${COMMIT}" \
+  && echo "BUILD commit_hash=${COMMIT_HASH}" \
   && echo "BUILD version=${VER}" \
   && CGO_ENABLED=0 GOOS=linux go build -ldflags \
-    "-X main.build_dt=${BUILD_DT} -X main.commit=${COMMIT} -X main.version=${VER}" \
+    "-X main.build_dt=${BUILD_DT} -X main.commit=${COMMIT_HASH} -X main.version=${VER}" \
     -o main cmd/cli/main.go
 
 FROM scratch
