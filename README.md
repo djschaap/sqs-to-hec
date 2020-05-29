@@ -27,10 +27,22 @@ go build -ldflags \
   cmd/cli/cli.go
 ```
 
-### Build Container
+### Build Container (Manually)
 
 ```bash
-docker build .
+docker build -t sqs-to-hec .
+```
+
+### Publish Container (Manually)
+
+```bash
+CONTAINER_REGISTRY=ACCOUNT.dkr.ecr.REGION.amazonaws.com
+VER=0.0.0
+# If AWS ECR, log in to registry every 12 hours:
+# aws ecr get-login-password \
+#  | docker login -u AWS --password-stdin ${CONTAINER_REGISTRY}
+docker tag sqs-to-hec ${CONTAINER_REGISTRY}/sqs-to-hec:${VER}
+docker push ${CONTAINER_REGISTRY}/sqs-to-hec:${VER}
 ```
 
 ### Run Container
